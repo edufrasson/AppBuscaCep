@@ -7,7 +7,6 @@ namespace AppBuscaCep.Model
 {
     public class Bairro
     {
-        public string descricao_bairro { get; set; }
-        
+        public string descricao_bairro { get; set; }        
     }
 }
