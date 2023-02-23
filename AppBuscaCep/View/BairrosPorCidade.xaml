@@ -26,7 +26,7 @@
 
                     </Picker>
                 </StackLayout>
-                <ListView>
+                <ListView x:Name="lst_bairros">
                     <ListView.Header>
                         <StackLayout>
                             <Label Text="Nome do Bairro: "/>
