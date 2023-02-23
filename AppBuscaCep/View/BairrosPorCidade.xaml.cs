@@ -41,11 +41,11 @@ namespace AppBuscaCep.View
 
             }catch(Exception ex)
             {
-                DisplayAlert("Erro", ex.Message, "Ok");
+                await DisplayAlert("Erro", ex.Message, "Ok");
             }
         }
 
-        private void pck_cidade_SelectedIndexChanged(object sender, EventArgs e)
+        private async void pck_cidade_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             try
@@ -53,17 +53,17 @@ namespace AppBuscaCep.View
 
                 Picker disparador = sender as Picker;
 
-                string estado = disparador.SelectedItem as int;
+                int id_cidade = disparador.SelectedIndex;
 
-                List<Bairro> arr_cidades = await DataService.GetBairrosByIdCidade(estado);
+                List<Bairro> arr_bairros = await DataService.GetBairrosByIdCidade(id_cidade);
                 lista_cidades.Clear();
 
-                arr_cidades.ForEach(item => lista_bairros.Add(item));
+                arr_bairros.ForEach(item => lista_bairros.Add(item));
 
             }
             catch (Exception ex)
             {
-                DisplayAlert("Erro", ex.Message, "Ok");
+                await DisplayAlert("Erro", ex.Message, "Ok");
             }
         }
     }
