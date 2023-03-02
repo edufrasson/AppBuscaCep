@@ -72,7 +72,7 @@ namespace AppBuscaCep.Service
 
             using (HttpClient client = new HttpClient())
             {
-                HttpResponseMessage response = await client.GetAsync("https://https://cep.metoda.com.br/logradouro/by-bairro?id_cidade="+ id_cidade + "&bairro=" + bairro);
+                HttpResponseMessage response = await client.GetAsync("https://cep.metoda.com.br/logradouro/by-bairro?id_cidade="+ id_cidade + "&bairro=" + bairro);
                 if (response.IsSuccessStatusCode)
                 {
                     string json = response.Content.ReadAsStringAsync().Result;
@@ -83,6 +83,25 @@ namespace AppBuscaCep.Service
             }
 
             return arr_logradouro;
+        }
+
+        public static async Task<List<Logradouro>> GetCepByLogradouro(string logradouro)
+        {
+            List<Logradouro> arr_cep = new List<Logradouro>();
+
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync("https://cep.metoda.com.br/cep/by-logradouro?logradouro=" + logradouro);
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = response.Content.ReadAsStringAsync().Result;
+                    arr_cep = JsonConvert.DeserializeObject<List<Logradouro>>(json);
+                }
+                else
+                    throw new Exception(response.RequestMessage.Content.ToString());
+            }
+
+            return arr_cep;
         }
     }
 }
