@@ -39,7 +39,8 @@ namespace AppBuscaCep.View
 
                 arr_cidades.ForEach(i => lista_cidades.Add(i));
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 await DisplayAlert("Erro", ex.Message, "Ok");
             }
