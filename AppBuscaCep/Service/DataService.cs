@@ -85,9 +85,9 @@ namespace AppBuscaCep.Service
             return arr_logradouro;
         }
 
-        public static async Task<List<Logradouro>> GetCepByLogradouro(string logradouro)
+        public static async Task<List<Cep>> GetCepByLogradouro(string logradouro)
         {
-            List<Logradouro> arr_cep = new List<Logradouro>();
+            List<Cep> arr_cep = new List<Cep>();
 
             using (HttpClient client = new HttpClient())
             {
@@ -95,7 +95,7 @@ namespace AppBuscaCep.Service
                 if (response.IsSuccessStatusCode)
                 {
                     string json = response.Content.ReadAsStringAsync().Result;
-                    arr_cep = JsonConvert.DeserializeObject<List<Logradouro>>(json);
+                    arr_cep = JsonConvert.DeserializeObject<List<Cep>>(json);
                 }
                 else
                     throw new Exception(response.RequestMessage.Content.ToString());
