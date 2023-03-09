@@ -11,7 +11,7 @@ namespace AppBuscaCep
         {
             InitializeComponent();
 
-            MainPage = new BairrosPorCidade();
+            MainPage = new NavigationPage(new View.Menu());
         }
 
         protected override void OnStart()
