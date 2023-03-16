@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AppBuscaCep.Model;
+using AppBuscaCep.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,25 @@ namespace AppBuscaCep.View
         public CepPorLogradouro()
         {
             InitializeComponent();
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                carregando.IsRunning = true;
+
+                List<Cep> arr_ceps = await DataService.GetCepByLogradouro(txtLogradouro.Text);
+
+                lst_ceps.ItemsSource = arr_ceps;
+            }catch(Exception ex)
+            {
+                await DisplayAlert("Ops", ex.Message, "Ok");
+            }
+            finally
+            {
+                carregando.IsRunning = false;
+            }
         }
     }
 }

@@ -9,10 +9,12 @@
                 <SearchBar x:Name="txtLogradouro"
                            Placeholder="Qual é sua rua?"
                            />
-                <Button Text="Buscar"/>
+                <Button Text="Buscar" Clicked="Button_Clicked"/>
             </StackLayout>
-
-            <ListView>
+            
+            <ActivityIndicator x:Name="carregando" IsRunning="False"/>
+            
+            <ListView x:Name="lst_ceps">
                 <ListView.Header>
                     <Grid ColumnDefinitions="Auto, *, *, Auto"
                           RowDefinitions="Auto"
@@ -21,13 +23,13 @@
                         <Label Grid.Row="0" Grid.Column="0"
                                Text="CEP: "/>
                         
-                        <Label Grid.Row="1" Grid.Column="0"
+                        <Label Grid.Row="0" Grid.Column="1"
                                Text="Logradouro: "/>
                         
-                        <Label Grid.Row="2" Grid.Column="0"
+                        <Label Grid.Row="0" Grid.Column="2"
                                Text="Cidade: "/>
                         
-                        <Label Grid.Row="3" Grid.Column="0"
+                        <Label Grid.Row="0" Grid.Column="3"
                                Text="UF: "/>                                                      
                         
                     </Grid>
@@ -35,12 +37,12 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid ColumnDefinitions="Auto, *, *, Auto"
+                            <Grid ColumnDefinitions="*, *, *, *"
                                   RowDefinitions="Auto">
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding CEP}"/>
-                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding descricao_logradouro}"/>
-                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding descricao_cidade}"/>
-                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding UF}"/>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding CEP}"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding descricao}"/>
+                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding descricao_cidade}"/>
+                                <Label Grid.Row="0" Grid.Column="3" Text="{Binding UF}"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
