@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AppBuscaCep.Model;
+using AppBuscaCep.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,27 @@ namespace AppBuscaCep.View
         public EnderecoPorCep()
         {
             InitializeComponent();
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                carregando.IsRunning = true;
+
+                Endereco arr_end = await DataService.GetEnderecoByCep(txtCep.Text);
+                List<Endereco> list_endereco = new List<Endereco>();
+                list_endereco.Add(arr_end);
+
+                lst_endereco.ItemsSource = list_endereco;
+            } catch (Exception ex)
+            {
+                await DisplayAlert("Ops", ex.Message, "Ok");
+            }
+            finally
+            {
+                carregando.IsRunning = false;
+            }
         }
     }
 }

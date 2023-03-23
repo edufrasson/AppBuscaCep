@@ -31,5 +31,15 @@ namespace AppBuscaCep.View
         {
             Navigation.PushAsync(new View.CidadePorEstado());
         }
+
+        private void Button_Clicked_3(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new View.EnderecoPorCep());
+        }
+
+        private void Button_Clicked_4(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new View.EnderecoPorBairroECidade());
+        }
     }
 }

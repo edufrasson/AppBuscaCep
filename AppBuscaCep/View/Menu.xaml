@@ -19,9 +19,11 @@
                     Text="Buscar Cidades por Estado" Clicked="Button_Clicked_2"/>
 
             <Button Grid.Row="2" Grid.Column="0"
-                    Text="Buscar Ruas de Bairro"/>
+                    Text="Buscar Ruas de Bairro E Cidade" Clicked="Button_Clicked_4"/>
 
-            <Button Grid.Row="2" Grid.Column="1" Text="Bairros por Cidade" Clicked="Button_Clicked_1"/>
+            <Button Grid.Row="2" Grid.Column="1" Text="Buscar Bairros por Cidade" Clicked="Button_Clicked_1"/>
+
+            <Button Grid.Row="3" Grid.Column="1" Text="Buscar Endereço por Cep" Clicked="Button_Clicked_3"/>
 
         </Grid>
     </ContentPage.Content>

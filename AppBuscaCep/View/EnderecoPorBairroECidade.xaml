@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppBuscaCep.View.CidadePorEstado">
+             x:Class="AppBuscaCep.View.EnderecoPorBairroECidade">
     <ContentPage.Content>
         <AbsoluteLayout
                 HorizontalOptions="FillAndExpand"
@@ -15,27 +15,35 @@
                         <Picker.Items>
                             <x:String>SP</x:String>
                             <x:String>MG</x:String>
-                            <x:String>RJ</x:String>
                         </Picker.Items>
                     </Picker>
-
+                    <Picker x:Name="pck_cidade"
+                            SelectedIndexChanged="pck_cidade_SelectedIndexChanged" 
+                            ItemDisplayBinding="{Binding descricao}"
+                            Title="Selecione a cidade"
+                            >                       
+                    </Picker>
+                    <Picker
+                        x:Name="pck_bairro"
+                        SelectedIndexChanged="pck_bairro_SelectedIndexChanged"
+                        ItemDisplayBinding="{Binding descricao}"
+                        Title="Selecione o Bairro"
+                        >
+                     
+                    </Picker>
                 </StackLayout>
-                <ListView x:Name="lst_cidade">
+                <ListView x:Name="lst_endereco">
                     <ListView.Header>
-                        <Grid ColumnDefinitions="Auto, *, *, Auto"
-                          RowDefinitions="Auto"
-                          >
-                            <Label Grid.Row="0" Grid.Column="0"
-                               Text="Cidade: "/>
-                        </Grid>
+                        <StackLayout>
+                            <Label Text="Nome do Bairro: "/>
+                        </StackLayout>
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid ColumnDefinitions="*, *, *, *"
-                                  RowDefinitions="Auto">                                    
-                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding descricao}" TextColor="Black"/>                                    
-                                </Grid>
+                                <StackLayout>
+                                    <Label Text="{Binding descricao_logradouro}"/>                                   
+                                </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

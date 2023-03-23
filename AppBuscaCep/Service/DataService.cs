@@ -10,16 +10,20 @@ namespace AppBuscaCep.Service
 {
     public class DataService
     {
+
        public static async Task<Endereco> GetEnderecoByCep(string cep)
         {
             Endereco end;
 
-            using(HttpClient client = new HttpClient())
+            //Console.WriteLine("https://cep.metoda.com.br/endereco/by-cep?cep=" + cep);
+
+            using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync("https://cep.metoda.com.br/endereco/by-cep?cep=" + cep);
                 if(response.IsSuccessStatusCode)
                 {
                     string json = response.Content.ReadAsStringAsync().Result;
+                    
                     end = JsonConvert.DeserializeObject<Endereco>(json);    
                 }
                 else
@@ -46,7 +50,9 @@ namespace AppBuscaCep.Service
             }
 
             return arr_bairro;
-        }
+        }       
+
+        // Funcionando!
         public static async Task<List<Cidade>> GetCidadeByEstado(string uf)
         {
             List<Cidade> arr_cidade = new List<Cidade>();
@@ -85,6 +91,7 @@ namespace AppBuscaCep.Service
             return arr_logradouro;
         }
 
+        // Funcionando! 
         public static async Task<List<Cep>> GetCepByLogradouro(string logradouro)
         {
             List<Cep> arr_cep = new List<Cep>();
