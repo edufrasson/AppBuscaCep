@@ -20,16 +20,13 @@
                     <Picker x:Name="pck_cidade"
                             SelectedIndexChanged="pck_cidade_SelectedIndexChanged" 
                             ItemDisplayBinding="{Binding descricao}"
-                            Title="Selecione a cidade"
-                            >                       
+                            Title="Selecione a cidade">                       
                     </Picker>
                     <Picker
                         x:Name="pck_bairro"
                         SelectedIndexChanged="pck_bairro_SelectedIndexChanged"
                         ItemDisplayBinding="{Binding descricao_bairro}"
-                        Title="Selecione o Bairro"
-                        >
-                     
+                        Title="Selecione o Bairro">                     
                     </Picker>
                 </StackLayout>
 

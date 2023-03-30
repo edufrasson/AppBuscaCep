@@ -18,15 +18,43 @@ namespace AppBuscaCep.View
 	{
         Cidade cidade_escolhida;
         ObservableCollection<Cidade> lista_cidades = new ObservableCollection<Cidade>();
-        ObservableCollection<Bairro> lista_bairros = new ObservableCollection<Bairro>();
+        ObservableCollection<Bairro> lista_bairros = new ObservableCollection<Bairro>();      
 
         public EnderecoPorBairroECidade ()
 		{
 			InitializeComponent ();
-
 			pck_cidade.ItemsSource = lista_cidades;
-            pck_bairro.ItemsSource = lista_bairros;   
-           
+            pck_bairro.ItemsSource = lista_bairros;              
+        }
+
+        private async void pck_estado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                carregando.IsRunning = true;
+                lista_bairros.Clear();
+                lista_cidades.Clear();
+
+                Picker disparador = sender as Picker;
+
+                string estado = disparador.SelectedItem as string;
+
+                List<Cidade> arr_cidades = await DataService.GetCidadeByEstado(estado);
+
+                lista_cidades.Clear();
+
+                arr_cidades.ForEach(i => lista_cidades.Add(i));
+
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Erro", ex.Message, "Ok");
+                Console.WriteLine(ex.StackTrace);
+            }
+            finally
+            {
+                carregando.IsRunning = false;
+            }
         }
 
         private async void pck_bairro_SelectedIndexChanged(object sender, EventArgs e)
@@ -35,17 +63,23 @@ namespace AppBuscaCep.View
             {
                 carregando.IsRunning = true;
 
+                lst_endereco.ItemsSource = null;
+
                 Picker disparador = sender as Picker;
 
                 Bairro bairro_selecionado = disparador.SelectedItem as Bairro;
 
-                List<Logradouro> arr_end = await DataService.GetLogradouroByBairroAndIdCidade(bairro_selecionado.descricao_bairro, cidade_escolhida.id_cidade);
+                if (bairro_selecionado != null)
+                {
+                    List<Logradouro> arr_end = await DataService.GetLogradouroByBairroAndIdCidade(bairro_selecionado.descricao_bairro, cidade_escolhida.id_cidade);
 
-                lst_endereco.ItemsSource = arr_end;
+                    lst_endereco.ItemsSource = arr_end;
+                }
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Erro", ex.Message, "Ok");
+                Console.WriteLine(ex.StackTrace);
             }
             finally
             {
@@ -58,13 +92,17 @@ namespace AppBuscaCep.View
             try
             {
                 carregando.IsRunning = true;
+                lista_bairros.Clear();
+
 
                 Picker disparador = sender as Picker;
 
                 Cidade cidade_selecionada = disparador.SelectedItem as Cidade;
 
-                List<Bairro> arr_bairros = await DataService.GetBairrosByIdCidade(cidade_selecionada.id_cidade);
                 lista_bairros.Clear();
+
+                List<Bairro> arr_bairros = await DataService.GetBairrosByIdCidade(cidade_selecionada.id_cidade);
+              
 
                 arr_bairros.ForEach(item => lista_bairros.Add(item));
                 Console.WriteLine(arr_bairros);
@@ -75,6 +113,7 @@ namespace AppBuscaCep.View
             catch (Exception ex)
             {
                 await DisplayAlert("Erro", ex.Message, "Ok");
+                Console.WriteLine(ex.StackTrace);
             }
             finally
             {
@@ -82,30 +121,6 @@ namespace AppBuscaCep.View
             }
         }
 
-        private async void pck_estado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                carregando.IsRunning = true;
-
-                Picker disparador = sender as Picker;
-
-                string estado = disparador.SelectedItem as string;
-
-                List<Cidade> arr_cidades = await DataService.GetCidadeByEstado(estado);
-                lista_cidades.Clear();
-
-                arr_cidades.ForEach(i => lista_cidades.Add(i));
-
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            finally
-            {
-                carregando.IsRunning = false;
-            }
-        }
+        
     }
 }

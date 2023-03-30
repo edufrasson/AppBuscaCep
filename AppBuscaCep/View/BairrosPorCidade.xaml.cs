@@ -21,7 +21,7 @@ namespace AppBuscaCep.View
         {
             InitializeComponent();
 
-            pck_cidade.ItemsSource = lista_cidades;
+            pck_cidade.ItemsSource = lista_cidades;            
             lst_bairros.ItemsSource = lista_bairros;
         }
 
