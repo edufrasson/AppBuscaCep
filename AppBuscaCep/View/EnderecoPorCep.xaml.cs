@@ -26,8 +26,10 @@ namespace AppBuscaCep.View
                 carregando.IsRunning = true;
 
                 Endereco arr_end = await DataService.GetEnderecoByCep(txtCep.Text);
-                List<Endereco> list_endereco = new List<Endereco>();
-                list_endereco.Add(arr_end);
+                List<Endereco> list_endereco = new List<Endereco>
+                {
+                    arr_end
+                };
 
                 lst_endereco.ItemsSource = list_endereco;
             } catch (Exception ex)

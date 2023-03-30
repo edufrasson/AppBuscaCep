@@ -1,5 +1,6 @@
 ﻿using AppBuscaCep.Model;
 using AppBuscaCep.Service;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,9 @@ namespace AppBuscaCep.View
         private async void pck_estado_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
-            {                
+            {
+                carregando.IsRunning = true;
+
                 Picker disparador = (Picker)sender;
 
                 string uf = disparador.SelectedItem as string;
@@ -40,6 +43,10 @@ namespace AppBuscaCep.View
             catch(Exception ex)
             {
                 await DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            finally
+            {
+                carregando.IsRunning = false;
             }
         }
 

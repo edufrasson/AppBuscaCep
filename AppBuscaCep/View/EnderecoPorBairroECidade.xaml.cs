@@ -33,6 +33,8 @@ namespace AppBuscaCep.View
         {
             try
             {
+                carregando.IsRunning = true;
+
                 Picker disparador = sender as Picker;
 
                 Bairro bairro_selecionado = disparador.SelectedItem as Bairro;
@@ -45,12 +47,17 @@ namespace AppBuscaCep.View
             {
                 await DisplayAlert("Erro", ex.Message, "Ok");
             }
+            finally
+            {
+                carregando.IsRunning = false;
+            }
         }
 
         private async void pck_cidade_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
+                carregando.IsRunning = true;
 
                 Picker disparador = sender as Picker;
 
@@ -60,6 +67,7 @@ namespace AppBuscaCep.View
                 lista_bairros.Clear();
 
                 arr_bairros.ForEach(item => lista_bairros.Add(item));
+                Console.WriteLine(arr_bairros);
 
                 this.cidade_escolhida = cidade_selecionada;
 
@@ -68,12 +76,17 @@ namespace AppBuscaCep.View
             {
                 await DisplayAlert("Erro", ex.Message, "Ok");
             }
+            finally
+            {
+                carregando.IsRunning = false;
+            }
         }
 
         private async void pck_estado_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
+                carregando.IsRunning = true;
 
                 Picker disparador = sender as Picker;
 
@@ -88,6 +101,10 @@ namespace AppBuscaCep.View
             catch (Exception ex)
             {
                 await DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            finally
+            {
+                carregando.IsRunning = false;
             }
         }
     }
