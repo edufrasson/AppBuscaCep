@@ -11,6 +11,7 @@ namespace AppBuscaCep.Model
         public string tipo { get; set; }
         public string uf { get; set; }
         public string complemento { get; set; }
+        public string descricao { get; set; }
         public string descricao_sem_numero { get; set; }
         public string descricao_cidade { get; set; }
         public string codigo_cidade_ibge { get; set; }

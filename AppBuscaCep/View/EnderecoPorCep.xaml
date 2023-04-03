@@ -32,7 +32,7 @@
                         <ViewCell>
                             <Grid ColumnDefinitions="*, *, *, *"
                                   RowDefinitions="Auto">                               
-                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding descricao_sem_numero}"/>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding descricao}"/>
                                 <Label Grid.Row="0" Grid.Column="1" Text="{Binding descricao_cidade}"/>                              
                             </Grid>
                         </ViewCell>
